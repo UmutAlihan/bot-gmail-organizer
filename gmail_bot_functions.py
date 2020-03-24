@@ -110,7 +110,7 @@ def list_all_messages(service, user_id):
         while 'nextPageToken' in response:
             page_token = response['nextPageToken']
             response = service.users().messages().list(userId=user_id, pageToken=page_token).execute()
-            print(response.keys)
+            #print(response.keys)
             messages.extend(response['messages'])
 
         return messages
@@ -232,7 +232,7 @@ def list_labels(service, user_id):
     
 
 def get_id_for_labelname(service, labelname):
-    labels = gb.list_labels(service, "me")
+    labels = list_labels(service, "me")
     for label in labels:
         if(label["name"] == labelname):
             return label["id"]
