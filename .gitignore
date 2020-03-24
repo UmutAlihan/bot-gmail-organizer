@@ -1,0 +1,8 @@
+
+*.json
+token.pickle
+*.pyc
+.ipynb_checkpoints/handle_job_applications-checkpoint.py
+.ipynb_checkpoints/gmail_bot_functions-checkpoint.py
+.ipynb_checkpoints/explore-checkpoint.ipynb
+.ipynb_checkpoints/explore-checkpoint.py

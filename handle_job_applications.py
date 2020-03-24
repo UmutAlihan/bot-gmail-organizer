@@ -8,9 +8,11 @@ service = gb.auth_service()
 mailIds = gb.list_all_messages(service,"me")
 
 # Get all mail info from Ids
-msgs = []
+mailBox = []
 for i, mailId in enumerate(mailIds):
     print(i)
     msg = gb.get_message(service, "me", mailId["id"])
-    msgs.append(msg)
+    mailBox.append(msg)
+
+glassdoor_mails = gb.find_matching_received_mails("glassdoor", mailBox)
 

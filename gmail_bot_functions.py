@@ -183,8 +183,10 @@ def list_messages_with_label(service, user_id, label_ids=[]):
   except errors.HttpError as error:
     print ('An error occurred: %s') % error
 
+
 def to_datetime(u): 
   return datetime.datetime.utcfromtimestamp(u) #to convert to normal time
+
 
 def check_direction(mail):
 	for data in mail["payload"]["headers"]:
@@ -196,14 +198,25 @@ def check_direction(mail):
 		if(data["name"] == "To"):
 			print(data["value"])
 
+
+def find_matching_received_mails(query_string, mailbox):
+    found_mails = []
+    for msg in mailbox:
+        for data in msg["payload"]["headers"]:
+            if(data["name"] == "From"):
+                if(query_string in data["value"]):
+                    #print(data["value"])
+                    found_mails.append(msg)
+    return found_mails
+            
 #@pysnooper.snoop()
-def check_string_in_From(query_string, mail):
+"""def check_string_in_From(query_string, mail):
     found_mails = []
 
     for data in mail["payload"]["headers"]:
         if(data["name"] == "From"):
             if(query_string in data["value"]):
-                found_mails.append(data)
+                found_mails.append(data)"""
 
 """    # Call the Gmail API
     results = service.users().labels().list(userId='me').execute()
