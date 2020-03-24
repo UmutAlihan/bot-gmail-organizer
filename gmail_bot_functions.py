@@ -26,7 +26,7 @@
 # limitations under the License.
 
 from __future__ import print_function
-import pysnooper
+#import pysnooper
 import pickle
 import os.path
 import base64
@@ -213,7 +213,7 @@ def find_matching_received_mails(query_string, mailbox):
 
 
 def list_labels(service, user_id):
-  """Get a list all labels in the user's mailbox.
+    """Get a list all labels in the user's mailbox.
 
   Args:
     service: Authorized Gmail API service instance.
@@ -223,12 +223,12 @@ def list_labels(service, user_id):
   Returns:
     A list all Labels in the user's mailbox.
   """
-  try:
-    response = service.users().labels().list(userId=user_id).execute()
-    labels = response['labels']
-    return labels
-  except errors.HttpError as error:
-    print ('An error occurred: %s' % error)
+    try:
+        response = service.users().labels().list(userId=user_id).execute()
+        labels = response['labels']
+        return labels
+    except errors.HttpError as error:
+        print ('An error occurred: %s' % error)
     
 
 def get_id_for_labelname(service, labelname):
@@ -237,6 +237,31 @@ def get_id_for_labelname(service, labelname):
         if(label["name"] == labelname):
             return label["id"]
 
+
+def modify_message_label(service, user_id, msg_id, msg_labels):
+  """Modify the Labels on the given Message.
+
+  Args:
+    service: Authorized Gmail API service instance.
+    user_id: User's email address. The special value "me"
+    can be used to indicate the authenticated user.
+    msg_id: The id of the message required.
+    msg_labels: The change in labels.
+
+  Returns:
+    Modified message, containing updated labelIds, id and threadId.
+  """
+  try:
+    message = service.users().messages().modify(userId=user_id, 
+                                                id=msg_id, 
+                                                body=msg_labels).execute()
+
+    label_ids = message['labelIds']
+
+    #print('Message ID: %s - With Label IDs %s' % (msg_id, label_ids))
+    return message
+  except Exception as error:
+    print ('An error occurred: %s' % error)
         
         
 
@@ -246,7 +271,6 @@ def get_id_for_labelname(service, labelname):
     # A label update object.
     return {'removeLabelIds': [], 'addLabelIds': ['UNREAD', 'INBOX', 'Label_2']}""" 
 
-#@pysnooper.snoop()
 """def check_string_in_From(query_string, mail):
     found_mails = []
 
