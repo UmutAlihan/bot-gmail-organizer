@@ -40,7 +40,8 @@ import time, datetime
 
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/gmail.readonly', 
-          'https://www.googleapis.com/auth/gmail.labels']
+          'https://www.googleapis.com/auth/gmail.labels',
+          'https://www.googleapis.com/auth/gmail.modify']
 
 
 def auth_service():
@@ -209,8 +210,8 @@ def find_matching_received_mails(query_string, mailbox):
                     #print(data["value"])
                     found_mails.append(msg)
     return found_mails
-            
-   
+
+
 def list_labels(service, user_id):
   """Get a list all labels in the user's mailbox.
 
@@ -229,10 +230,22 @@ def list_labels(service, user_id):
   except errors.HttpError as error:
     print ('An error occurred: %s' % error)
     
-    
-    
 
-    
+def get_id_for_labelname(service, labelname):
+    labels = gb.list_labels(service, "me")
+    for label in labels:
+        if(label["name"] == labelname):
+            return label["id"]
+
+        
+        
+
+"""def create_object_for_labelupdate():
+    #Create object to update labels.
+    # Returns:
+    # A label update object.
+    return {'removeLabelIds': [], 'addLabelIds': ['UNREAD', 'INBOX', 'Label_2']}""" 
+
 #@pysnooper.snoop()
 """def check_string_in_From(query_string, mail):
     found_mails = []
