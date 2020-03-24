@@ -16,3 +16,4 @@ for i, mailId in enumerate(mailIds):
 
 glassdoor_mails = gb.find_matching_received_mails("glassdoor", mailBox)
 
+#for each glassdoor mail set JobApp label

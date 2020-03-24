@@ -100,21 +100,21 @@ def get_attachments(service, user_id, msg_id, store_dir):
 
 
 def list_all_messages(service, user_id):
-  try:
-    response = service.users().messages().list(userId=user_id).execute()
-    messages = []
-    if 'messages' in response:
-      messages.extend(response['messages'])
+    try:
+        response = service.users().messages().list(userId=user_id).execute()
+        messages = []
+        if('messages' in response):
+            messages.extend(response['messages'])
 
-    while 'nextPageToken' in response:
-      page_token = response['nextPageToken']
-      response = service.users().messages().list(userId=user_id,
-                                         pageToken=page_token).execute()
-      messages.extend(response['messages'])
+        while 'nextPageToken' in response:
+            page_token = response['nextPageToken']
+            response = service.users().messages().list(userId=user_id, pageToken=page_token).execute()
+            print(response.keys)
+            messages.extend(response['messages'])
 
-    return messages
-  except errors.HttpError as error:
-    print ('An error occurred: %s' % error)
+        return messages
+    except Exception as error:
+        print ('An error occurred: %s' % error)
 
 
 def list_messages_with_matching_query(service, user_id, query=''):
@@ -225,8 +225,6 @@ def list_labels(service, user_id):
   try:
     response = service.users().labels().list(userId=user_id).execute()
     labels = response['labels']
-    for label in labels:
-      print('Label id: %s - Label name: %s' % (label['id'], label['name']))
     return labels
   except errors.HttpError as error:
     print ('An error occurred: %s' % error)
