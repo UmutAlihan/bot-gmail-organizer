@@ -14,10 +14,11 @@ for i, mailId in enumerate(mailIds):
     msg = gb.get_message(service, "me", mailId["id"])
     mailBox.append(msg)
 
-
 # Get label id for JobApp
-labelid = gb.get_id_for_labelname(service, "JobApp")
-label_actions = {'removeLabelIds': [], 'addLabelIds': [labelid]}
+labelid_jobapp = gb.get_id_for_labelname(service, "JobApp")
+labelid_inbox = gb.get_id_for_labelname(service, "INBOX")
+
+label_actions = {'removeLabelIds': [labelid_inbox], 'addLabelIds': [labelid]}
 
 # find un-labeled mails ("JobApp") and label those
 for mail in mailBox:
