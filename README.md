@@ -17,7 +17,7 @@ This repository is a collection of scripts to utilize wrapper functions in pytho
 
 * Enable [Gmail API](https://developers.google.com/gmail/api/quickstart/python) for your gmail account.
 * Create your own app and generate credential.json (you might have to design an authorization page). All detailed steps are in [Gmail API Quickstart Guide](https://developers.google.com/gmail/api/quickstart/python)
-* Install [Google Client Library] (https://developers.google.com/gmail/api/quickstart/python)
+* Install [Google Client Library](https://developers.google.com/gmail/api/quickstart/python)
 ```
 pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
 ```
