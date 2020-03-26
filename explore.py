@@ -34,3 +34,15 @@ for i in range(len(messages)):
 	print("############## ############# #############")
 
 
+
+
+mail = mailBox[0]
+
+u = (int(mail["internalDate"]) / 1000.0)
+date_mail = gb.to_datetime(u)
+
+d = date_mail
+d2 = d - dateutil.relativedelta.relativedelta(months=1)
+print(d2)
+
+timestamp = (date_mail - datetime(1970, 1, 1)).total_seconds()
