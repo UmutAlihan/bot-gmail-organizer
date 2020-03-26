@@ -1,6 +1,8 @@
 
 # bot-gmailbox-organizer
 
+![alt text](https://raw.githubusercontent.com/umutalihan/bot-gmail-organizer\assets\readme_picture.png)
+
 This bot organizes mailboxes of given gmail address based on given rules using labels to manage mails one-by-one.
 
 ## Description
