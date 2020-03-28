@@ -1,12 +1,12 @@
 import gmail_bot_functions as gb
-import sys
+import sys, time
 
-### INIT
+print("### INIT"); time.sleep(5)
 #Authenticate to your gmail address
 service = gb.auth_service()
 
 
-### GET DATA
+print("### GET DATA "); time.sleep(5)
 # Get all mail ids
     # glassdoor, nueove, etcd
 mailIds_glassdoor = gb.list_messages_with_matching_query(service, "me", query='glassdoor')
@@ -17,26 +17,27 @@ mailIds = gb.list_all_messages(service, "me")
 mailBox = gb.mailBox_retriever(service, mailIds_glassdoor, verbose=True)
 
 # Get label ids
-labelid_jobapp = gb.get_id_for_labelname(service, "JobApp")
-labelid_inbox = gb.get_id_for_labelname(service, "INBOX")
-labelid_dailycode = gb.get_id_for_labelname(service, "Daily Code")
+labelids = {"jobapp" : gb.get_id_for_labelname(service, "JobApp"),
+            "inbox" : gb.get_id_for_labelname(service, "INBOX"),
+            "dailycode" :  gb.get_id_for_labelname(service, "Daily Code")}
 
 
-label_actions_jobapp = {'removeLabelIds': [labelid_inbox], 'addLabelIds': [labelid_jobapp]}
-label_actions_dailycode = {'removeLabelIds': [labelid_inbox], 'addLabelIds': [labelid_dailycode]}
+label_actions_jobapp = {'removeLabelIds': [labelids["inbox"]], 
+                        'addLabelIds': [labelids["jobapp"]]}
+label_actions_dailycode = {'removeLabelIds': [labelids["inbox"]],
+                           'addLabelIds': [labelids["dailycode"]]}
 
 
-### PROCESS DATA
-
+print("### PROCESS DATA"); time.sleep(5)
 # find un-labeled mails ("JobApp") and label those
-"""for mail in mailBox:
-    if(labelid_jobapp in mail["labelIds"]):
+for mail in mailBox:
+    if(labelids["jobapp"] in mail["labelIds"]):
         print("It has JobApp label: " + mail["id"] )
         pass
     else:
         print("Modifing to JobApp:" + mail["id"])
-        gb.modify_message_label(service, "me", mail["id"], label_actions)  
-        #modify_message_label(service, user_id, msg_id, msg_labels)"""      
+        gb.modify_message_label(service, "me", mail["id"], label_actions_jobapp)  
+        #modify_message_label(service, user_id, msg_id, msg_labels)
 
 # find un-labeled mails ("Daily Code") and label those
 """for mail in mailBox:
@@ -47,6 +48,4 @@ label_actions_dailycode = {'removeLabelIds': [labelid_inbox], 'addLabelIds': [la
         print("Modifing to Daily Code:" + mail["id"])
         gb.modify_message_label(service, "me", mail["id"], label_actions_dailycode)  
         #modify_message_label(service, user_id, msg_id, msg_labels)"""
-
-fms = gb.find_mailids_below_threshold(mailBox, verbose=True)
 

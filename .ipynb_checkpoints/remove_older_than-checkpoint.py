@@ -1,67 +1,33 @@
 import gmail_bot_functions as gb
-import sys
+import sys, time
 
 ### INIT
 #Authenticate to your gmail address
 service = gb.auth_service()
 
 
-### GET DATA
-# Get all mail ids
-    # glassdoor, nueove, etcd
-mailIds_glassdoor = gb.list_messages_with_matching_query(service, "me", query='glassdoor')
-#mailIds_dailycode = gb.list_messages_with_matching_query(service, "me", query='Daily Coding')
-#mailIds = gb.list_all_messages(service, "me")
 
-# Get mail info from Ids
-"""mailBox = []
-for i, mailId in enumerate(mailIds):
-    print(i)
-    msg = gb.get_message(service, "me", mailId["id"])
-    mailBox.append(msg)
+print("### GET DATA"); time.sleep(5)
+## get mails with given Label
+label_ids = gb.get_id_for_labelname(service, "JobApp")
+label_mailids = gb.list_messages_with_label(service, "me", label_ids=[label_ids])
 
-mailBox = []
-for i, mailId in enumerate(mailIds_glassdoor):
-    print(i)
-    msg = gb.get_message(service, "me", mailId["id"])
-    mailBox.append(msg)"""
-
-mailBox = gb.mailBox_retriever(service, mailIds_glassdoor, verbose=True)
-
-print(mailBox)
-sys.exit()
-
-# Get label ids
-labelid_jobapp = gb.get_id_for_labelname(service, "JobApp")
-labelid_inbox = gb.get_id_for_labelname(service, "INBOX")
-#labelid_dailycode = gb.get_id_for_labelname(service, "Daily Code")
+## Get mail info from Ids
+mailBox = gb.mailBox_retriever(service, label_mailids, verbose=True)
+#verbose: for i, mail in enumerate(mailBox_jobapp):
+#verbose:    print("Snippet for mail: " + str(i) + " is: \n" + mail["snippet"])
 
 
-label_actions_jobapp = {'removeLabelIds': [labelid_inbox], 'addLabelIds': [labelid_jobapp]}
-#label_actions_dailycode = {'removeLabelIds': [labelid_inbox], 'addLabelIds': [labelid_dailycode]}
-
-
-### PROCESS DATA
-
-# find un-labeled mails ("JobApp") and label those
-"""for mail in mailBox:
-    if(labelid_jobapp in mail["labelIds"]):
-        print("It has JobApp label: " + mail["id"] )
-        pass
-    else:
-        print("Modifing to JobApp:" + mail["id"])
-        gb.modify_message_label(service, "me", mail["id"], label_actions)  
-        #modify_message_label(service, user_id, msg_id, msg_labels)"""      
-
-# find un-labeled mails ("Daily Code") and label those
-"""for mail in mailBox:
-    if(labelid_dailycode in mail["labelIds"]):
-        print("It has Daily Code label: " + mail["id"] )
-        pass
-    else:
-        print("Modifing to Daily Code:" + mail["id"])
-        gb.modify_message_label(service, "me", mail["id"], label_actions_dailycode)  
-        #modify_message_label(service, user_id, msg_id, msg_labels)"""
-
-fms = gb.find_mailids_below_threshold(mailBox, verbose=True)
-
+print("### PROCESS DATA"); time.sleep(5)
+## get labeled mails before given Date Threshold
+fms = gb.find_mailids_below_threshold(mailBox, verbose=False, month=1)
+if(fms == []):
+    print("No mails found to trash")
+elif(fms != [] and type(fms) == list):
+    print("Trying to delete mail")
+## trash mails older than Threshold
+    for mail in fms:
+        trash_message(service, mail["id"])
+        print('Gone - {}'.format(mail["snippet"]))
+else:
+    print("Something is wrong with fms variable: go check trash_message")

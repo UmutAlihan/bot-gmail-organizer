@@ -1,0 +1,6 @@
+
+An error occurred: [WinError 10054] An existing connection was forcibly closed by the remote host
+ConnectionResetError: [WinError 10054] An existing connection was forcibly closed by the remote host
+
+## Item bulunamadığında
+An error occurred: <HttpError 404 when requesting https://www.googleapis.com/gmail/v1/users/me/messages/17044d8c811405d6/modify?alt=json returned "Not Found">

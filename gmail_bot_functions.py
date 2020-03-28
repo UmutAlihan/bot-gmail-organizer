@@ -269,12 +269,12 @@ def modify_message_label(service, user_id, msg_id, msg_labels):
     print ('An error occurred: %s' % error)
         
         
-def find_mailids_below_threshold(mailBox, verbose=False):
+def find_mailids_below_threshold(mailBox, month, verbose=False):
     found_mailids = []
     for i, mail in enumerate(mailBox):
         tunix = (int(mail["internalDate"]) / 1000.0)
         tnormal = to_datetime(tunix)
-        tthreshold = datetime.datetime.today() - dateutil.relativedelta.relativedelta(months=3)
+        tthreshold = datetime.datetime.today() - dateutil.relativedelta.relativedelta(months=month)
         comparison = tnormal.date() < tthreshold.date()
         if(not comparison):
             if(verbose):
@@ -284,7 +284,7 @@ def find_mailids_below_threshold(mailBox, verbose=False):
             if(verbose):
                 print("Position: {} -- State: {} -- {} -- mailID: {} -- Tnormal: {} > Tthresh {}"
                   .format("added", comparison, i, mail["id"], tnormal, tthreshold))
-            found_mailids.append(mail["id"])
+            found_mailids.append(mail)
     return found_mailids
 
 
@@ -299,7 +299,12 @@ def mailBox_retriever(service, mailIds, stop=None, verbose=False):
             print("Got limited " + str(stop) + " mails!")
             break
     return mailBox
-        
+
+
+def trash_message(service, mailid ,userId="me"):
+    return service.users().messages().trash(userId=userId, id=mailid).execute()
+
+
 
 """def create_object_for_labelupdate():
     #Create object to update labels.
