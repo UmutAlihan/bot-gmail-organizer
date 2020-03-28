@@ -37,7 +37,6 @@ from google.auth.transport.requests import Request
 from apiclient import errors
 import datetime
 from time import time
-from datetime import timezone
 import dateutil.relativedelta
 
 
@@ -193,6 +192,8 @@ def list_messages_with_label(service, user_id, label_ids=[]):
 def to_datetime(u): 
   return datetime.datetime.utcfromtimestamp(u) #to convert to normal time
 
+def to_unixtime(d):
+    return (d - datetime.datetime(1970, 1, 1)).total_seconds()
 
 def check_direction(mail):
 	for data in mail["payload"]["headers"]:
@@ -268,7 +269,36 @@ def modify_message_label(service, user_id, msg_id, msg_labels):
     print ('An error occurred: %s' % error)
         
         
+def find_mailids_below_threshold(mailBox, verbose=False):
+    found_mailids = []
+    for i, mail in enumerate(mailBox):
+        tunix = (int(mail["internalDate"]) / 1000.0)
+        tnormal = to_datetime(tunix)
+        tthreshold = datetime.datetime.today() - dateutil.relativedelta.relativedelta(months=3)
+        comparison = tnormal.date() < tthreshold.date()
+        if(not comparison):
+            if(verbose):
+                print("Position: {} -- State: {} -- {} -- mailID: {} -- Tnormal: {} > Tthresh {}"
+                  .format("not added", comparison, i, mail["id"], tnormal, tthreshold))
+        elif(comparison):
+            if(verbose):
+                print("Position: {} -- State: {} -- {} -- mailID: {} -- Tnormal: {} > Tthresh {}"
+                  .format("added", comparison, i, mail["id"], tnormal, tthreshold))
+            found_mailids.append(mail["id"])
+    return found_mailids
 
+
+def mailBox_retriever(service, mailIds, stop=None, verbose=False):
+    mailBox = []
+    for i, mailId in enumerate(mailIds):
+        if(verbose and 1 % 10 == 0):
+            print("Retrieved msg: " + i)
+        msg = get_message(service, "me", mailId["id"])
+        mailBox.append(msg)
+        if( stop is not None and i == stop):
+            print("Got limited " + str(stop) + " mails!")
+            break
+    return mailBox
         
 
 """def create_object_for_labelupdate():
