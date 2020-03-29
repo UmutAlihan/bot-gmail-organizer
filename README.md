@@ -3,12 +3,11 @@
 
 ![alt text](https://raw.githubusercontent.com/umutalihan/bot-gmail-organizer\assets\readme_picture.png)
 
-This bot organizes mailboxes of given gmail address based on given rules using labels to manage mails one-by-one.
+This repo is wrapper library for Gmail API interactions. Additionally it includes scripts used for my personal assistant bot. 
+It organizes mailboxes of gmail account based on defined rules.
 
 
-## Contents
-  * [bot-gmailbox-organizer](#bot-gmailbox-organizer)
-  * [Contents](#contents)                                                                             
+## Contents                                                                            
   * [Description](#description)
   * [Getting Started](#getting-started)                                                                  
   * [Dependencies](#dependencies)                                                                     

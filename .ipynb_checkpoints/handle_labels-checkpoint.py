@@ -9,12 +9,13 @@ service = gb.auth_service()
 print("### GET DATA "); time.sleep(5)
 # Get all mail ids
     # glassdoor, nueove, etcd
-mailIds_glassdoor = gb.list_messages_with_matching_query(service, "me", query='glassdoor')
-mailIds_dailycode = gb.list_messages_with_matching_query(service, "me", query='Daily Coding')
-mailIds = gb.list_all_messages(service, "me")
+mailIds_neuvoo = gb.list_messages_with_matching_query(service, "me", query='neuvoo')
+#mailIds_glassdoor = gb.list_messages_with_matching_query(service, "me", query='glassdoor')
+#mailIds_dailycode = gb.list_messages_with_matching_query(service, "me", query='Daily Coding')
+#mailIds = gb.list_all_messages(service, "me")
 
 # Get mail info from Ids
-mailBox = gb.mailBox_retriever(service, mailIds_glassdoor, verbose=True)
+mailBox = gb.mailBox_retriever(service, mailIds_neuvoo, verbose=True)
 
 # Get label ids
 labelids = {"jobapp" : gb.get_id_for_labelname(service, "JobApp"),

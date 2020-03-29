@@ -85,6 +85,18 @@ def get_message(service, user_id, msg_id):
     print('An error occurred: %s' % error)  
 
 
+def get_message_info(mail):    
+    headers = mail["payload"]["headers"]
+    for item in headers:
+        if(item["name"] == "Date"):
+            date = item["value"]
+        if(item["name"] == "From"):
+            address = item["value"]
+        if(item["name"] == "Subject"):
+            subject = item["value"]
+    return (date, address, subject)
+
+
 def get_attachments(service, user_id, msg_id, store_dir):
   try:
     message = service.users().messages().get(userId=user_id, id=msg_id).execute()
@@ -291,8 +303,8 @@ def find_mailids_below_threshold(mailBox, month, verbose=False):
 def mailBox_retriever(service, mailIds, stop=None, verbose=False):
     mailBox = []
     for i, mailId in enumerate(mailIds):
-        if(verbose and 1 % 10 == 0):
-            print("Retrieved msg: " + i)
+        if(verbose):
+            print("Retrieved msg: " + str(i) + " --- " + mailId["id"])
         msg = get_message(service, "me", mailId["id"])
         mailBox.append(msg)
         if( stop is not None and i == stop):

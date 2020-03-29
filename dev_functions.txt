@@ -1,6 +1,7 @@
 auth_service()
 get_messages(service, user_id)
 get_message(service, user_id, msg_id)
+get_message_info(mail):
 get_attachments(service, user_id, msg_id, store_dir)
 list_all_messages(service, user_id)
 list_messages_with_matching_query(service, user_id, query='')
