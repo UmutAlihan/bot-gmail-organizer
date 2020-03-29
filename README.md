@@ -7,7 +7,14 @@ This bot organizes mailboxes of given gmail address based on given rules using l
 
 
 ## Contents
-[TOC]
+  * [bot-gmailbox-organizer](#bot-gmailbox-organizer)
+  * [Contents](#contents)                                                                             
+  * [Description](#description)
+  * [Getting Started](#getting-started)                                                                  
+  * [Dependencies](#dependencies)                                                                     
+  * [Installing](#installing)                                                                      
+  * [Contribution &amp; Collaboration](#contribution--collaboration)                                  
+  * [Authors](#authors)      
 
 
 ## Description
