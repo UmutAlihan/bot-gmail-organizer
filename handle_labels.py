@@ -1,44 +1,70 @@
 import gmail_bot_functions as gb
-import sys, time
-
-print("### INIT"); time.sleep(5)
-#Authenticate to your gmail address
-service = gb.auth_service()
+import sys, time, traceback
 
 
-print("### GET DATA "); time.sleep(5)
-# Get all mail ids
-    # glassdoor, nueove, etcd
-mailIds_neuvoo = gb.list_messages_with_matching_query(service, "me", query='neuvoo')
-#mailIds_glassdoor = gb.list_messages_with_matching_query(service, "me", query='glassdoor')
-#mailIds_dailycode = gb.list_messages_with_matching_query(service, "me", query='Daily Coding')
-#mailIds = gb.list_all_messages(service, "me")
 
-# Get mail info from Ids
-mailBox = gb.mailBox_retriever(service, mailIds_neuvoo, verbose=True)
+def execute(args):
+	try:
+		if(len(args) > 0):
+			pass
+		else:
+			print("not enough args")
+			sys.exit()
 
-# Get label ids
-labelids = {"jobapp" : gb.get_id_for_labelname(service, "JobApp"),
-            "inbox" : gb.get_id_for_labelname(service, "INBOX"),
-            "dailycode" :  gb.get_id_for_labelname(service, "Daily Code")}
+		print("### INIT"); time.sleep(5)
+		#Authenticate to your gmail address
+		service = gb.auth_service()
 
 
-label_actions_jobapp = {'removeLabelIds': [labelids["inbox"]], 
-                        'addLabelIds': [labelids["jobapp"]]}
-label_actions_dailycode = {'removeLabelIds': [labelids["inbox"]],
-                           'addLabelIds': [labelids["dailycode"]]}
+		print("### GET DATA "); time.sleep(5)
+		# Get all mail ids
+		query = args[0]
+		labelname = args[1]
+
+		mailIds = gb.list_messages_with_matching_query(service, "me", query=query)
+		#mailIds_glassdoor = gb.list_messages_with_matching_query(service, "me", query='glassdoor')
+
+		#mailIds_dailycode = gb.list_messages_with_matching_query(service, "me", query='Daily Coding')
+		#label_actions_dailycode = {'removeLabelIds': [labelids["inbox"]],
+		#                           'addLabelIds': [labelids["dailycode"]]}
+
+		# Get label ids
+		"""labelids = {"jobapp" : gb.get_id_for_labelname(service, "JobApp"),
+		            "inbox" : gb.get_id_for_labelname(service, "INBOX"),
+		            "dailycode" :  gb.get_id_for_labelname(service, "Daily Code")}"""
+		labelid = gb.get_id_for_labelname(service, labelname)
+		labelid_inbox = gb.get_id_for_labelname(service, "INBOX")
+
+		label_actions_jobapp = {'removeLabelIds': [labelid_inbox], 
+								'addLabelIds': [labelid]}
+
+		# Get mail info from Ids
+		print("# Retrieving: '" + query + "' related mails" )
+		mailBox = gb.mailBox_retriever(service, mailIds, verbose=True)
 
 
-print("### PROCESS DATA"); time.sleep(5)
-# find un-labeled mails ("JobApp") and label those
-for mail in mailBox:
-    if(labelids["jobapp"] in mail["labelIds"]):
-        print("It has JobApp label: " + mail["id"] )
-        pass
-    else:
-        print("Modifing to JobApp:" + mail["id"])
-        gb.modify_message_label(service, "me", mail["id"], label_actions_jobapp)  
-        #modify_message_label(service, user_id, msg_id, msg_labels)
+		print("### PROCESS DATA"); time.sleep(5)
+		# find un-labeled mails ("JobApp") and label those
+		for mail in mailBox:
+		    if(labelid in mail["labelIds"]):
+		        print("It has JobApp label: " + mail["id"] )
+		        pass
+		    else:
+		        print("Modifing to JobApp:" + mail["id"])
+		        gb.modify_message_label(service, "me", mail["id"], label_actions_jobapp)  
+		        #modify_message_label(service, user_id, msg_id, msg_labels)
+	except:
+		exc_info = sys.exc_info()
+		# Display the *original* exception
+		traceback.print_exception(*exc_info)
+		del exc_info
+
+
+
+if __name__ == "__main__":
+   execute(sys.argv[1:])
+
+
 
 # find un-labeled mails ("Daily Code") and label those
 """for mail in mailBox:
