@@ -38,7 +38,7 @@ from apiclient import errors
 import datetime
 from time import time
 import dateutil.relativedelta
-
+import os
 
 
 # If modifying these scopes, delete the file token.pickle.
@@ -49,6 +49,7 @@ SCOPES = ['https://www.googleapis.com/auth/gmail.readonly',
 
 def auth_service():
   try:
+    os.chdir("/home/uad/develop/bot-gmail-organizer/")
     creds = None
     # The file token.pickle stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first

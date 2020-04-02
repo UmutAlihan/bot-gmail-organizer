@@ -1,7 +1,8 @@
 import gmail_bot_functions as gb
 import sys, time, traceback
 
-
+# Sample command:
+# python3 handle_labels.py neuvoo JobApp
 
 def execute(args):
 	try:
@@ -47,7 +48,7 @@ def execute(args):
 		# find un-labeled mails ("JobApp") and label those
 		for mail in mailBox:
 		    if(labelid in mail["labelIds"]):
-		        print("It has JobApp label: " + mail["id"] )
+		        #print("It has JobApp label: " + mail["id"] )
 		        pass
 		    else:
 		        print("Modifing to JobApp:" + mail["id"])
