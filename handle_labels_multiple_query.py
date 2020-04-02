@@ -18,9 +18,9 @@ def execute(args):
 
         print("### GET DATA "); time.sleep(2)
         # Get all mail ids
-        queries = args[:-1] #exclude label 
+        queries = args[:-1] #exclude label
         labelname = args[-1] # include only label
-        
+
         gb.label_messages_with_multiple_queries(service, queries, labelname)
 
     except:

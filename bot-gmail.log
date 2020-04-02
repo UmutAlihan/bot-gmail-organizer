@@ -1,0 +1,93 @@
+Traceback (most recent call last):
+  File "handle_labels.py", line 44, in execute
+    mailBox = gb.mailBox_retriever(service, mailIds, verbose=True)
+  File "/home/uad/develop/bot-gmail-organizer/gmail_bot_functions.py", line 314, in mailBox_retriever
+    msg = get_message(service, "me", mailId["id"])
+  File "/home/uad/develop/bot-gmail-organizer/gmail_bot_functions.py", line 89, in get_message
+    return service.users().messages().get(userId=user_id, id=msg_id, format='metadata').execute()
+  File "/usr/local/lib/python3.6/dist-packages/googleapiclient/_helpers.py", line 134, in positional_wrapper
+    return wrapped(*args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/googleapiclient/http.py", line 892, in execute
+    headers=self.headers,
+  File "/usr/local/lib/python3.6/dist-packages/googleapiclient/http.py", line 172, in _retry_request
+    resp, content = http.request(uri, method, *args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/google_auth_httplib2.py", line 198, in request
+    uri, method, body=body, headers=request_headers, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/httplib2/__init__.py", line 1991, in request
+    cachekey,
+  File "/usr/local/lib/python3.6/dist-packages/httplib2/__init__.py", line 1651, in _request
+    conn, request_uri, method, body, headers
+  File "/usr/local/lib/python3.6/dist-packages/httplib2/__init__.py", line 1589, in _conn_request
+    response = conn.getresponse()
+  File "/usr/lib/python3.6/http/client.py", line 1346, in getresponse
+    response.begin()
+  File "/usr/lib/python3.6/http/client.py", line 307, in begin
+    version, status, reason = self._read_status()
+  File "/usr/lib/python3.6/http/client.py", line 268, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/usr/lib/python3.6/socket.py", line 586, in readinto
+    return self._sock.recv_into(b)
+  File "/usr/lib/python3.6/ssl.py", line 1012, in recv_into
+    return self.read(nbytes, buffer)
+  File "/usr/lib/python3.6/ssl.py", line 874, in read
+    return self._sslobj.read(len, buffer)
+  File "/usr/lib/python3.6/ssl.py", line 631, in read
+    v = self._sslobj.read(len, buffer)
+KeyboardInterrupt
+### INIT
+# Authenticated
+### GET DATA 
+# Retrieving: 'neuvoo' related mails
+Retrieved msg: 0 --- 171398265756a92b
+Retrieved msg: 10 --- 1712f36f992951f7
+Retrieved msg: 20 --- 17124eae1edb138f
+Retrieved msg: 30 --- 1711a9c5bdcc31f5
+Retrieved msg: 40 --- 171104ea627e566b
+Retrieved msg: 50 --- 17106038e79efdca
+Retrieved msg: 60 --- 170fc92b1b8efee7
+Retrieved msg: 70 --- 170f16727e0735fb
+Retrieved msg: 80 --- 170e71b7461c4ca6
+Retrieved msg: 90 --- 170dccc1537705f6
+Retrieved msg: 100 --- 170d35daf9662254
+Retrieved msg: 110 --- 170c8348ead8d828
+Retrieved msg: 120 --- 170bde69fdef090b
+Retrieved msg: 130 --- 170b3d0b3802279a
+Retrieved msg: 140 --- 17094e5ccf6ed9e9
+Retrieved msg: 150 --- 1706baf9137217aa
+Retrieved msg: 160 --- 1706163574b7ea49
+Retrieved msg: 170 --- 1705714c36ecb0fa
+Retrieved msg: 180 --- 1704cc375d0ccaa9
+Retrieved msg: 190 --- 170427a94a22958a
+### INIT
+# Authenticated
+### GET DATA 
+# Retrieving: 'neuvoo' related mails
+Retrieved msg: 0 --- 171398265756a92b
+Retrieved msg: 10 --- 1712f36f992951f7
+Retrieved msg: 20 --- 17124eae1edb138f
+Retrieved msg: 30 --- 1711a9c5bdcc31f5
+Retrieved msg: 40 --- 171104ea627e566b
+Retrieved msg: 50 --- 17106038e79efdca
+Retrieved msg: 60 --- 170fc92b1b8efee7
+Retrieved msg: 70 --- 170f16727e0735fb
+Retrieved msg: 80 --- 170e71b7461c4ca6
+Retrieved msg: 90 --- 170dccc1537705f6
+Retrieved msg: 100 --- 170d35daf9662254
+Retrieved msg: 110 --- 170c8348ead8d828
+Retrieved msg: 120 --- 170bde69fdef090b
+Retrieved msg: 130 --- 170b3d0b3802279a
+Retrieved msg: 140 --- 17094e5ccf6ed9e9
+Retrieved msg: 150 --- 1706baf9137217aa
+Retrieved msg: 160 --- 1706163574b7ea49
+Retrieved msg: 170 --- 1705714c36ecb0fa
+Retrieved msg: 180 --- 1704cc375d0ccaa9
+Retrieved msg: 190 --- 170427a94a22958a
+Retrieved msg: 200 --- 170382e2d08b3320
+Retrieved msg: 210 --- 1702dde3c4054321
+Retrieved msg: 220 --- 170238dc445c447f
+Retrieved msg: 230 --- 17019414411f0224
+Retrieved msg: 240 --- 1700ef4608f3f8ae
+Retrieved msg: 250 --- 17004a63202d8189
+Retrieved msg: 260 --- 16ffa5942ff7532f
+Retrieved msg: 270 --- 16ff00bbc0fb96bf
+### PROCESS DATA
