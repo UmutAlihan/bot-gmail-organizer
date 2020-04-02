@@ -314,7 +314,7 @@ def modify_message_label(service, user_id, msg_id, msg_labels):
     print ('An error occurred: %s' % error)
         
         
-def find_mailids_below_threshold(mailBox, month, verbose=False):
+def find_mailids_below_threshold(mailBox, month=1, verbose=False):
     found_mailids = []
     for i, mail in enumerate(mailBox):
         tunix = (int(mail["internalDate"]) / 1000.0)
