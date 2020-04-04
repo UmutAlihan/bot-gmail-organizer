@@ -3,10 +3,10 @@
 ### Here I developed a wrapper library for the needs of my bot
 
 
-### Source to learn: 
+### Source to learn:
 ### https://blog.mailtrap.io/send-emails-with-gmail-api/
 #
-### Google API client installation: 
+### Google API client installation:
 ### pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
 
 
@@ -25,8 +25,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
+
 from __future__ import print_function
-#import pysnooper
 import pickle
 import os.path
 import base64
@@ -39,12 +40,20 @@ import datetime
 from time import time
 import dateutil.relativedelta
 import os
+import logging, coloredlogs
 
 
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/gmail.readonly', 
           'https://www.googleapis.com/auth/gmail.labels',
           'https://www.googleapis.com/auth/gmail.modify']
+
+coloredlogs.install()
+logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s',
+	level=logging.INFO,
+	datefmt='%Y-%m-%d %H:%M:%S')
+
+
 
 
 def auth_service():

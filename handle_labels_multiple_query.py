@@ -1,5 +1,5 @@
 import gmail_bot_functions as gb
-import sys, time, traceback
+import sys, time, traceback, logging, coloredlogs
 
 # Sample command:
 # python3 handle_labels_multiple_queries.py reddit stackoverflow Informative
@@ -12,7 +12,8 @@ def execute(args):
             print("not enough args")
             sys.exit()
 
-        print("### INIT"); time.sleep(2)
+        logging.info("INIT"); time.sleep(2)
+        #print("### INIT"); time.sleep(2)
         #Authenticate to your gmail address
         service = gb.auth_service()
 
