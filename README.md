@@ -1,8 +1,8 @@
 
 # bot-gmail-organizer
 
-This repo is wrapper library for Gmail API interactions. Additionally it includes scripts used for my personal assistant bot. 
-It organizes mailboxes of gmail account based on defined rules.
+This repo is wrapper library for Gmail API interactions. Additionally it includes scripts used for my personal assistant bot (on Linux via orchestration of cron jobs). 
+It organizes mailboxes in a give gmail account based on defined rules.
 
 
 ## Contents                                                                            
