@@ -1,3 +1,5 @@
+#! /usr/bin/env python3
+
 import gmail_bot_functions as gb
 import sys, time, traceback, logging, coloredlogs
 

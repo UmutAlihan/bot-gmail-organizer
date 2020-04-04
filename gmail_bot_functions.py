@@ -51,7 +51,7 @@ logging.getLogger('root').setLevel(logging.DEBUG)
 
 def auth_service():
   try:
-    #os.chdir("/home/uad/apps/bot-gmail-organizer/")
+    os.chdir("/home/uad/apps/bot-gmail-organizer/")
     creds = None
     # The file token.pickle stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
