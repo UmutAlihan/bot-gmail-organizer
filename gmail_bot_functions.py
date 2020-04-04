@@ -14,7 +14,9 @@
 #
 ### Colored logs:
 ### Source: https://stackoverflow.com/questions/384076/how-can-i-color-python-logging-output
-
+#
+### CLI Arguments:
+### Source: https://towardsdatascience.com/learn-enough-python-to-be-useful-argparse-e482e1764e05
 
 from __future__ import print_function
 import pickle
