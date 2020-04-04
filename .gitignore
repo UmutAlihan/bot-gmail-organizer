@@ -1,4 +1,3 @@
-
 *.json
 token.pickle
 *.pyc
@@ -6,3 +5,4 @@ token.pickle
 .ipynb_checkpoints/gmail_bot_functions-checkpoint.py
 .ipynb_checkpoints/explore-checkpoint.ipynb
 .ipynb_checkpoints/explore-checkpoint.py
+*.log
