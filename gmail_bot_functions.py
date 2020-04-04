@@ -49,7 +49,7 @@ SCOPES = ['https://www.googleapis.com/auth/gmail.readonly',
 
 def auth_service():
   try:
-    os.chdir("/home/uad/develop/bot-gmail-organizer/")
+    os.chdir("/home/uad/apps/bot-gmail-organizer/")
     creds = None
     # The file token.pickle stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
@@ -206,11 +206,11 @@ def list_messages_with_label(service, user_id, label_ids=[]):
   except errors.HttpError as error:
     print ('An error occurred: %s') % error
 
-    
+
 def label_messages_with_multiple_queries(service, queries, label):
     labelid = get_id_for_labelname(service, label)
     labelid_inbox = get_id_for_labelname(service, "INBOX")
-    label_actions_jobapp = {'removeLabelIds': [labelid_inbox], 
+    label_actions = {'removeLabelIds': [labelid_inbox],
                             'addLabelIds': [labelid]}
 
     for query in queries:
@@ -219,7 +219,7 @@ def label_messages_with_multiple_queries(service, queries, label):
         len(mailIds)
 
         mailBox = mailBox_retriever(service, mailIds, verbose=False)
-        
+
         # More filters after using default Gmail API query
         #   Search 'query' string in "From" mail adresses
         for mail in mailBox:
@@ -231,7 +231,7 @@ def label_messages_with_multiple_queries(service, queries, label):
                             pass
                         else:
                             print("Modifing to " + label + " :" + mail["id"])
-                            modify_message_label(service, "me", mail["id"], label_actions_jobapp)  
+                            modify_message_label(service, "me", mail["id"], label_actions)
 
 
 def to_datetime(u): 
