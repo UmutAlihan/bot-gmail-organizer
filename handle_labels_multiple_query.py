@@ -9,7 +9,7 @@ def execute(args):
         if(len(args) > 0):
             pass
         else:
-            print("not enough args")
+            logging.info("not enough args")
             sys.exit()
 
         logging.info("INIT"); time.sleep(2)
@@ -17,7 +17,7 @@ def execute(args):
         #Authenticate to your gmail address
         service = gb.auth_service()
 
-        print("### GET DATA "); time.sleep(2)
+        logging.info("GET DATA"); time.sleep(2)
         # Get all mail ids
         queries = args[:-1] #exclude label
         labelname = args[-1] # include only label
@@ -33,6 +33,7 @@ def execute(args):
 
 
 if __name__ == "__main__":
+    logging.info("running handle_labels_multiple_query.py")
     execute(sys.argv[1:])
 
 

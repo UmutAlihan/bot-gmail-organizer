@@ -1,23 +1,26 @@
 import gmail_bot_functions as gb
-import sys, time, traceback
+import sys, time, traceback, logging, coloredlogs
+
+# Sample command:
+# python3 remove_older_than.py JobApp 3
 
 
 
 def execute(args):
     try:
-        print("### INIT PROCESS"); time.sleep(2)
+        logging.info("INIT PROCESS"); time.sleep(2)
         #Check args
         if(len(args) > 1):
             labelname = args[0]
             month = args[1]
         else:
-            print("not enough args")
+            logging.error("not enough args")
             sys.exit()
         #Authenticate to your gmail address
         service = gb.auth_service()
 
 
-        print("### GET DATA"); time.sleep(2)
+        logging.info("GET DATA"); time.sleep(2)
         ## get mails with given Label
         label_ids = gb.get_id_for_labelname(service, labelname)
         label_mailids = gb.list_messages_with_label(service, "me", label_ids=[label_ids])
@@ -25,20 +28,21 @@ def execute(args):
         ## Get mail info from Ids
         mailBox = gb.mailBox_retriever(service, label_mailids, verbose=True)
 
-        print("### PROCESS DATA"); time.sleep(2)
+        logging.info("PROCESS DATA"); time.sleep(2)
         ## get labeled mails before given Date Threshold
         fms = gb.find_mailids_below_threshold(mailBox, month=int(month), verbose=False)
         if(fms == []):
-            print("No mails found to trash")
+            logging.warning("No mails found to trash")
         elif(fms != [] and type(fms) == list):
         ## trash mails older than Threshold
-            print("Trying to delete mail")
+            logging.info("Trying to delete mail")
             for mail in fms:
                 gb.trash_message(service, mail["id"])
-                print('Gone - {}'.format(mail["snippet"]))
+                logging.debug('Gone - {}'.format(mail["snippet"]))
         else:
-            print("Something is wrong with fms variable: go check trash_message")
+            logging.warning("Something is wrong with fms variable: go check trash_message")
     except Exception as e:
+        logging.error(e)
         exc_info = sys.exc_info()
         # Display the *original* exception
         traceback.print_exception(*exc_info)
@@ -47,4 +51,5 @@ def execute(args):
 
 
 if __name__ == "__main__":
+    logging.info("remove_older_than.py")
     execute(sys.argv[1:])

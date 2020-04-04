@@ -42,12 +42,16 @@ logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s',
 	level=logging.INFO,
 	datefmt='%Y-%m-%d %H:%M:%S')
 
+logging.getLogger('googleapiclient.discovery_cache').setLevel(logging.CRITICAL)
+logging.getLogger('googleapiclient.discovery').setLevel(logging.WARNING)
+logging.getLogger('root').setLevel(logging.DEBUG)
+
 
 
 
 def auth_service():
   try:
-    os.chdir("/home/uad/apps/bot-gmail-organizer/")
+    #os.chdir("/home/uad/apps/bot-gmail-organizer/")
     creds = None
     # The file token.pickle stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
@@ -66,10 +70,11 @@ def auth_service():
       # Save the credentials for the next run
       with open('token.pickle', 'wb') as token:
         pickle.dump(creds, token)
-    print("# Authenticated")
+    
+    logging.info("# Authenticated")
   except Exception as e:
-    print("# Authentication failed")
-    print(e)
+    logging.info("Authentication failed")
+    logging.error(e)
 
   service = build('gmail', 'v1', credentials=creds)
   return service
@@ -86,7 +91,7 @@ def get_message(service, user_id, msg_id):
   try:
     return service.users().messages().get(userId=user_id, id=msg_id, format='metadata').execute()
   except Exception as error:
-    print('An error occurred: %s' % error)  
+    logging.error(error)
 
 
 def get_message_info(mail):    
@@ -116,7 +121,7 @@ def get_attachments(service, user_id, msg_id, store_dir):
         f.write(file_data)
         f.close()
   except Exception as error:
-    print('An error occurred: %s' % error)
+    ogging.error(error)
 
 
 def list_all_messages(service, user_id):
@@ -134,7 +139,7 @@ def list_all_messages(service, user_id):
 
         return messages
     except Exception as error:
-        print ('An error occurred: %s' % error)
+        logging.error(error)
 
 
 def list_messages_with_matching_query(service, user_id, query=''):
@@ -168,7 +173,7 @@ def list_messages_with_matching_query(service, user_id, query=''):
 
     return messages
   except errors.HttpError as error:
-    print ('An error occurred: %s' % error)
+    logging.error(error)
 
 
 def list_messages_with_label(service, user_id, label_ids=[]):
@@ -202,7 +207,7 @@ def list_messages_with_label(service, user_id, label_ids=[]):
 
     return messages
   except errors.HttpError as error:
-    print ('An error occurred: %s') % error
+    logging.error(error)
 
 
 def label_messages_with_multiple_queries(service, queries, label):
@@ -212,7 +217,7 @@ def label_messages_with_multiple_queries(service, queries, label):
                             'addLabelIds': [labelid]}
 
     for query in queries:
-        print("For Query: " + query)
+        logging.info("For Query: " + query)
         mailIds = list_messages_with_matching_query(service, "me", query=query)
         len(mailIds)
 
@@ -225,10 +230,10 @@ def label_messages_with_multiple_queries(service, queries, label):
                 if(header["name"] == "From"):
                     if(query in header["value"]):  #### query is used here
                         if(labelid in mail["labelIds"]): ####
-                            print("It has already " + label + " label: " + mail["id"] )
+                            logging.debug("It has already " + label + " label: " + mail["id"] )
                             pass
                         else:
-                            print("Modifing to " + label + " :" + mail["id"])
+                            logging.info("Modifing to " + label + " :" + mail["id"])
                             modify_message_label(service, "me", mail["id"], label_actions)
 
 
@@ -242,11 +247,11 @@ def check_direction(mail):
 	for data in mail["payload"]["headers"]:
 		# Get "From:"
 		if(data["name"] == "From"):
-			print("From: " + data["value"])
+			logging.info("From: " + data["value"])
 			return "From"
 		# Get "To:" 
 		if(data["name"] == "To"):
-			print(data["value"])
+			logging.info(data["value"])
 
 
 def find_matching_received_mails(query_string, mailbox):
@@ -276,7 +281,7 @@ def list_labels(service, user_id):
         labels = response['labels']
         return labels
     except errors.HttpError as error:
-        print ('An error occurred: %s' % error)
+        logging.error(error)
     
 
 def get_id_for_labelname(service, labelname):
@@ -309,7 +314,7 @@ def modify_message_label(service, user_id, msg_id, msg_labels):
     #print('Message ID: %s - With Label IDs %s' % (msg_id, label_ids))
     return message
   except Exception as error:
-    print ('An error occurred: %s' % error)
+    logging.error(error)
         
         
 def find_mailids_below_threshold(mailBox, month=1, verbose=False):
@@ -321,11 +326,11 @@ def find_mailids_below_threshold(mailBox, month=1, verbose=False):
         comparison = tnormal.date() < tthreshold.date()
         if(not comparison):
             if(verbose):
-                print("Position: {} -- State: {} -- {} -- mailID: {} -- Tnormal: {} > Tthresh {}"
+                logging.debug("Position: {} -- State: {} -- {} -- mailID: {} -- Tnormal: {} > Tthresh {}"
                   .format("not added", comparison, i, mail["id"], tnormal, tthreshold))
         elif(comparison):
             if(verbose):
-                print("Position: {} -- State: {} -- {} -- mailID: {} -- Tnormal: {} > Tthresh {}"
+                logging.debug("Position: {} -- State: {} -- {} -- mailID: {} -- Tnormal: {} > Tthresh {}"
                   .format("added", comparison, i, mail["id"], tnormal, tthreshold))
             found_mailids.append(mail)
     return found_mailids
@@ -335,11 +340,11 @@ def mailBox_retriever(service, mailIds, stop=None, verbose=False):
     mailBox = []
     for i, mailId in enumerate(mailIds):
         if(verbose and (i % 10) == 0):
-            print("Retrieved msg: " + str(i) + " --- " + mailId["id"])
+            logging.debug("Retrieved msg: " + str(i) + " --- " + mailId["id"])
         msg = get_message(service, "me", mailId["id"])
         mailBox.append(msg)
         if( stop is not None and i == stop):
-            print("Got limited " + str(stop) + " mails!")
+            logging.info("Got limited " + str(stop) + " mails!")
             break
     return mailBox
 
@@ -384,4 +389,4 @@ def trash_message(service, mailid ,userId="me"):
 
     return mime_msg
   except Exception as error:
-    print('An error occurred: %s' % error)"""
+    logging.error(error)"""
