@@ -7,24 +7,13 @@
 ### https://blog.mailtrap.io/send-emails-with-gmail-api/
 #
 ### Google API client installation:
-### pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
-
-
-
-# Copyright 2018 Google LLC
+### pip3 install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
+### Log with timestamp:
+### Source: https://stackoverflow.com/questions/28330317/print-timestamp-for-logging-in-python/44175370
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
+### Colored logs:
+### Source: https://stackoverflow.com/questions/384076/how-can-i-color-python-logging-output
 
 
 from __future__ import print_function
