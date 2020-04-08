@@ -12,6 +12,8 @@ mailBox = gb.mailBox_retriever(service, mailIds, verbose=True)
 
 counted_messages, sorted_counted_messages = gb.count_retrieved_messages(mailBox)
 
+
+#CSV writer source: https://pythonspot.com/save-a-dictionary-to-a-file/
 w = csv.writer(open("counted_messages.csv", "w"))
 for key, val in counted_messages.items():
     w.writerow([key, val])
