@@ -1,6 +1,6 @@
 *.csv
 *.json
-token.pickle
+*.pickle
 *.pyc
 .ipynb_checkpoints/handle_job_applications-checkpoint.py
 .ipynb_checkpoints/gmail_bot_functions-checkpoint.py
