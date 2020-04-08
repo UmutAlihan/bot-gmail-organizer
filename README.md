@@ -20,11 +20,7 @@ This repository is a collection of scripts to utilize wrapper functions in pytho
 
 ## Getting Started
 
-All related functions are in gmail_bot_functions.py file. With simple import you can start using wrapper functions. Currently I develop regular automations for my mailbox by writing new .py files. Those are named as what their function in my mailbox is. Since this is a project is in scope of "code to learn" concept, I would be super happy, if you could provide issues, development suggestions, pull requests, beautifying the README, etc.
-
-### Dependencies
-
-* Will be written...
+All wrapper functions are in gmail_bot_functions.py file. Simply with ```from gmail_bot_functions import [FunctionName]```  you can start. Currently I develop regular automations for my mailbox by writing new .py files. Those are named as descriptive as possible. Since this project aims for "code to learn", I would be super happy, if you could help me by sending issues, development suggestions, pull requests, beautifying the README, etc. Really, anything is appreciated.
 
 ### Installing
 
