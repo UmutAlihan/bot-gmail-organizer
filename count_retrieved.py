@@ -16,13 +16,11 @@ logging.info("counting mails")
 counted_messages, sorted_counted_messages = gb.count_retrieved_messages(mailBox)
 
 
-<<<<<<< HEAD
-filename = "counted_messages.csv"
-logging.info("writing into: " + filename)
-w = csv.writer(open(filename, "w"))
-=======
 #CSV writer source: https://pythonspot.com/save-a-dictionary-to-a-file/
-w = csv.writer(open("counted_messages.csv", "w"))
->>>>>>> f0ab7ea93ad5f25ae563313ead78563b439549a4
+logging.info("writing into: " + filename)
+filename = "counted_messages.csv"
+w = csv.writer(open(filename, "w"))
 for key, val in counted_messages.items():
     w.writerow([key, val])
+
+
