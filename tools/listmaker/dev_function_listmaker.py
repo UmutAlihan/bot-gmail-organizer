@@ -1,4 +1,4 @@
-with open('gmail_bot_functions.py', 'r') as f:
+with open('../gmail_bot_functions.py', 'r') as f:
     text = f.readlines()
 
 newlines = []

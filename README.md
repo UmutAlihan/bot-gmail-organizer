@@ -24,19 +24,21 @@ All related functions are in gmail_bot_functions.py file. With simple import you
 
 ### Dependencies
 
-* Describe any prerequisites, libraries, OS version, etc., needed before installing program.
+* Will be written...
 
 ### Installing
 
-* Install Juypter Notebook for exploring the codebase with explore.pynb
-* Enable [Gmail API](https://developers.google.com/gmail/api/quickstart/python) for your gmail account.
+* (Optional) Install Juypter Notebook for exploring the codebase with explore.pynb
+* Enable [Gmail API](https://developers.google.com/gmail/api/quickstart/python) for your gmail account to make it accessible via bot.
 * Create your own app and generate credential.json (you might have to design an authorization page). All detailed steps are in [Gmail API Quickstart Guide](https://developers.google.com/gmail/api/quickstart/python)
-* Install [Google Client Library](https://developers.google.com/gmail/api/quickstart/python)
-* (You can find cmd below in explore.ipynb notebook.)
+* Install [Google Client Library](https://developers.google.com/gmail/api/quickstart/python):
 ```
 pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
 ```
-
+* start using scripts, e.g.:
+```
+python3 remove_older_than.py [Months] [LabelName]  ## retrieves all mails with label [LabelName] and moves mails older than [Months] months to Trash
+```
 
 ## Contribution & Collaboration
 
