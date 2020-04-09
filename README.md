@@ -14,7 +14,7 @@ It organizes mailboxes in a give gmail account based on defined rules.
   * [Authors](#authors)      
 
 
-## Description
+## Overview
 
 This repository is a collection of scripts to utilize wrapper functions in python. This module/library is developed as a wrapper for [Gmail API](https://developers.google.com/gmail/api). Gmail API uses get/post requests using Http protocol and transfer data with json objects as usual. Personally I developed this simple wrapper and wrote scripts around it in order to clutter my personal mailbox. I needed this to arrange my Glassdoor, LinkedIn open position notifications into their own folder from Inbox by inserting/removing Labels. 
 
