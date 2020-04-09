@@ -7,10 +7,8 @@ import click
 #(4)Source: https://www.youtube.com/watch?v=hJhZhLg3obk
 
 #print(len(sys.argv))
-#print()
 
-args = sys.argv[1:]
-#args = sys.argv
+#args = sys.argv[1:]
 
 """if(len(args) > 0):
 	print("ok")
@@ -23,6 +21,15 @@ else:
 #	print(arg)
 
 
-print("username: " + args[0])
-print("queries: " + "".join(args[1:-1]))
-print("labelname: " + "".join(args[-1]))
+@click.command()
+@click.option('--count', default=1, help='Number of greetings.')
+@click.option('--name', prompt='Your name', help='The person to greet.')
+
+def hello(count, name):
+	"""Simple program that greets NAME for a total of COUNT times."""
+	for x in range(count):
+		click.echo('Hello %s!' % name)
+
+if __name__ == '__main__':
+	hello()
+

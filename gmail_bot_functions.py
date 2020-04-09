@@ -30,7 +30,7 @@ from apiclient import errors
 import datetime
 from time import time
 import dateutil.relativedelta
-import os
+import os, sys
 import logging, coloredlogs
 
 
@@ -76,6 +76,41 @@ def auth_service():
     logging.info("# Authenticated")
   except Exception as e:
     logging.info("Authentication failed")
+    logging.error(e)
+
+  service = build('gmail', 'v1', credentials=creds)
+  return service
+
+
+def auth_service_to(account):
+  try:
+    #os.chdir("/home/uad/apps/bot-gmail-organizer/")
+    pathname = os.path.dirname(sys.argv[0])
+    fullpath = os.path.abspath(pathname)
+    creds = None
+    # The file token.pickle stores the user's access and refresh tokens, and is
+    # created automatically when the authorization flow completes for the first
+    # time.
+    file_token = fullpath + '/tokens/token-' + account + '.pickle'
+    file_cred = fullpath + '/tokens/credentials.json'
+    if os.path.exists(file_token):
+      with open(file_token, 'rb') as token:
+        creds = pickle.load(token)
+    # If there are no (valid) credentials available, let the user log in.
+    if not creds or not creds.valid:
+      if creds and creds.expired and creds.refresh_token:
+        creds.refresh(Request())
+      else:
+        flow = InstalledAppFlow.from_client_secrets_file(
+            file_cred, SCOPES)
+        creds = flow.run_local_server(port=0)
+      # Save the credentials for the next run      
+      with open(file_token, 'wb') as token:
+        pickle.dump(creds, token)
+    
+    logging.info("# Authenticated with " + account)
+  except Exception as e:
+    logging.info("Authentication failed for " + account)
     logging.error(e)
 
   service = build('gmail', 'v1', credentials=creds)
