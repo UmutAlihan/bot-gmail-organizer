@@ -51,7 +51,7 @@ logging.getLogger('root').setLevel(logging.DEBUG)
 
 
 
-def auth_service():
+"""def auth_service():
   try:
     os.chdir("/home/uad/apps/bot-gmail-organizer/")
     creds = None
@@ -80,12 +80,12 @@ def auth_service():
     sys.exit(1)
 
   service = build('gmail', 'v1', credentials=creds)
-  return service
+  return service"""
 
 
 def auth_service_to(account):
   try:
-    #os.chdir("/home/uad/apps/bot-gmail-organizer/")
+    os.chdir("/home/uad/apps/bot-gmail-organizer/")
     pathname = os.path.dirname(sys.argv[0])
     fullpath = os.path.abspath(pathname)
     creds = None
