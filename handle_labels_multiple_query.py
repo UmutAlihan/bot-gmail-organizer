@@ -16,8 +16,8 @@ def execute(args):
             sys.exit()
 
 
-        logging.info("INIT"); time.sleep(2)        
-        #parse arguments        
+        logging.info("INIT"); time.sleep(2)
+        #parse arguments
         account = args[0] # account name to login
         queries = args[1:-1] #exclude label & accountname, only query kwords
         labelname = args[-1] # include only label
@@ -36,6 +36,7 @@ def execute(args):
         # Display the *original* exception
         traceback.print_exception(*exc_info)
         del exc_info
+        sys.exit(1)
 
 
 

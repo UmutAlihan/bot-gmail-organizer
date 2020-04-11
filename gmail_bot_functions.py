@@ -72,11 +72,12 @@ def auth_service():
       # Save the credentials for the next run
       with open('token.pickle', 'wb') as token:
         pickle.dump(creds, token)
-    
-    logging.info("# Authenticated")
+
+    logging.info("Authenticated")
   except Exception as e:
     logging.info("Authentication failed")
     logging.error(e)
+    sys.exit(1)
 
   service = build('gmail', 'v1', credentials=creds)
   return service
@@ -104,14 +105,15 @@ def auth_service_to(account):
         flow = InstalledAppFlow.from_client_secrets_file(
             file_cred, SCOPES)
         creds = flow.run_local_server(port=0)
-      # Save the credentials for the next run      
+      # Save the credentials for the next run
       with open(file_token, 'wb') as token:
         pickle.dump(creds, token)
-    
+
     logging.info("# Authenticated with " + account)
   except Exception as e:
     logging.info("Authentication failed for " + account)
     logging.error(e)
+    sys.exit(1)
 
   service = build('gmail', 'v1', credentials=creds)
   return service
