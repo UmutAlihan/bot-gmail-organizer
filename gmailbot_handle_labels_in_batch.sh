@@ -22,10 +22,11 @@ trap 'echo "\"${last_command}\" command filed with exit code $?."' EXIT
 #SOURCE2: https://kvz.io/blog/2013/11/21/bash-best-practices
 ################################################################
 
+SCRIPTPATH="/home/uad/apps/bot-gmail-organizer"
 
-python3 handle_labels_multiple_query.py alihandikel reddit stackoverflow medium Informative
-python3 handle_labels_multiple_query.py averneus reddit stackoverflow medium Informative
-python3 handle_labels_multiple_query.py averneus neuvoo glassdoor linkedin JobApp
-python3 handle_labels_multiple_query.py alihandikel neuvoo glassdoor linkedin JobApp
-python3 handle_labels_multiple_query.py averneus dailycodingproblem DailyCode
-python3 handle_labels_multiple_query.py averneus pythonweekly elementalselenium jsw@peterc Notes
+python3 $SCRIPTPATH/handle_labels_multiple_query.py alihandikel reddit stackoverflow medium Informative
+python3 $SCRIPTPATH/handle_labels_multiple_query.py averneus reddit stackoverflow medium Informative
+python3 $SCRIPTPATH/handle_labels_multiple_query.py averneus neuvoo glassdoor linkedin JobApp
+python3 $SCRIPTPATH/handle_labels_multiple_query.py alihandikel neuvoo glassdoor linkedin JobApp
+python3 $SCRIPTPATH/handle_labels_multiple_query.py averneus dailycodingproblem DailyCode
+python3 $SCRIPTPATH/handle_labels_multiple_query.py averneus pythonweekly elementalselenium jsw@peterc Notes
