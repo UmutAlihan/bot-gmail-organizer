@@ -133,7 +133,7 @@ def get_message(service, user_id, msg_id):
     logging.error(error)
 
 
-def get_message_info(mail):    
+def get_message_info(mail):
     headers = mail["payload"]["headers"]
     for item in headers:
         if(item["name"] == "Date"):
@@ -269,14 +269,14 @@ def label_messages_with_multiple_queries(service, queries, label):
                 if(header["name"] == "From"):
                     if(query in header["value"]):  #### query is used here
                         if(labelid in mail["labelIds"]): ####
-                            logging.debug("It has already " + label + " label: " + mail["id"] )
+                            logging.debug("It has already " + label + " label: " + mail["id"] + "for query: " + query)
                             pass
                         else:
-                            logging.info("Modifing to " + label + " :" + mail["id"])
+                            logging.info("Modifing to " + label + " :" + mail["id"] + "for query: " + query)
                             modify_message_label(service, "me", mail["id"], label_actions)
 
 
-def to_datetime(u): 
+def to_datetime(u):
   return datetime.datetime.utcfromtimestamp(u) #to convert to normal time
 
 def to_unixtime(d):
@@ -321,7 +321,7 @@ def list_labels(service, user_id):
         return labels
     except errors.HttpError as error:
         logging.error(error)
-    
+
 
 def get_id_for_labelname(service, labelname):
     labels = list_labels(service, "me")
@@ -354,8 +354,8 @@ def modify_message_label(service, user_id, msg_id, msg_labels):
     return message
   except Exception as error:
     logging.error(error)
-        
-        
+
+
 def find_mailids_below_threshold(mailBox, month=1, verbose=False):
     found_mailids = []
     for i, mail in enumerate(mailBox):
