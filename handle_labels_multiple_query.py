@@ -36,6 +36,7 @@ def execute(args):
         # Display the *original* exception
         traceback.print_exception(*exc_info)
         del exc_info
+        sys.exit(1)
 
 
 

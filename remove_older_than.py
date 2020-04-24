@@ -19,7 +19,7 @@ def execute(args):
             logging.error("not enough args")
             sys.exit()
         #Authenticate to your gmail address
-        service = gb.auth_service()
+        service = gb.auth_service_to("averneus")
 
 
         logging.info("GET DATA"); time.sleep(2)

@@ -1,0 +1,32 @@
+#!/bin/bash
+
+#ERROR HANDLING
+################################################################
+
+# Exit on error. Append "|| true" if you expect an error.
+set -o errexit
+# Exit on error inside any functions or subshells.
+set -o errtrace
+# Do not allow use of undefined vars. Use ${VAR:-} to use an undefined VAR
+#set -o nounset
+# Catch the error in case mysqldump fails (but gzip succeeds) in `mysqldump |gzip`
+set -o pipefail
+# Turn on traces, useful while debugging but commented out by default
+#set -o xtrace
+
+# keep track of the last executed command
+trap 'last_command=$current_command; current_command=$BASH_COMMAND' DEBUG
+# echo an error message before exiting
+trap 'echo "\"${last_command}\" command filed with exit code $?."' EXIT
+#SOURCE: https://intoli.com/blog/exit-on-errors-in-bash-scripts/
+#SOURCE2: https://kvz.io/blog/2013/11/21/bash-best-practices
+################################################################
+
+SCRIPTPATH="/home/uad/apps/bot-gmail-organizer"
+
+python3 $SCRIPTPATH/handle_labels_multiple_query.py alihandikel reddit stackoverflow medium quora Informative
+python3 $SCRIPTPATH/handle_labels_multiple_query.py averneus reddit stackoverflow medium quora Informative
+python3 $SCRIPTPATH/handle_labels_multiple_query.py averneus neuvoo glassdoor linkedin JobApp
+python3 $SCRIPTPATH/handle_labels_multiple_query.py alihandikel neuvoo glassdoor linkedin JobApp
+python3 $SCRIPTPATH/handle_labels_multiple_query.py averneus dailycodingproblem DailyCode
+python3 $SCRIPTPATH/handle_labels_multiple_query.py averneus pythonweekly elementalselenium jsw Notes
