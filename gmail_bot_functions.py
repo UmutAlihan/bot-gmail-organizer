@@ -85,9 +85,13 @@ logging.getLogger('root').setLevel(logging.DEBUG)
 
 def auth_service_to(account):
   try:
-    os.chdir("/home/uad/apps/bot-gmail-organizer/")
+    path_to_be = "/home/uad/apps/bot-gmail-organizer"
+    os.chdir(path_to_be)
     pathname = os.path.dirname(sys.argv[0])
     fullpath = os.path.abspath(pathname)
+    if (path_to_be != fullpath):
+        print("fullpath & path_to_me mismatch: " + fullpath)
+        sys.exit()
     creds = None
     # The file token.pickle stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
