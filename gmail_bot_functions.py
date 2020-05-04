@@ -85,8 +85,13 @@ logging.getLogger('root').setLevel(logging.DEBUG)
 
 def auth_service_to(account):
   try:
+<<<<<<< HEAD
     path_to_be = "/home/uad/apps/bot-gmail-organizer"
     os.chdir(path_to_be)
+=======
+    #os.chdir("/home/uad/apps/bot-gmail-organizer/")
+    os.chdir("/home/uad/dev/gmail-organiser/")
+>>>>>>> 0b34feb18b715a78152922268e225f63e11d6efc
     pathname = os.path.dirname(sys.argv[0])
     fullpath = os.path.abspath(pathname)
     if (path_to_be != fullpath):
@@ -117,7 +122,7 @@ def auth_service_to(account):
   except Exception as e:
     logging.info("Authentication failed for " + account)
     logging.error(e)
-    sys.exit(1)
+    #sys.exit(1)
 
   service = build('gmail', 'v1', credentials=creds)
   return service

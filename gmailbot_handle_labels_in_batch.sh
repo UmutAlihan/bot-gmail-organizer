@@ -22,11 +22,49 @@ trap 'echo "\"${last_command}\" command filed with exit code $?."' EXIT
 #SOURCE2: https://kvz.io/blog/2013/11/21/bash-best-practices
 ################################################################
 
-SCRIPTPATH="/home/uad/apps/bot-gmail-organizer"
 
-python3 $SCRIPTPATH/handle_labels_multiple_query.py alihandikel reddit stackoverflow medium quora Informative
-python3 $SCRIPTPATH/handle_labels_multiple_query.py averneus reddit stackoverflow medium quora Informative
-python3 $SCRIPTPATH/handle_labels_multiple_query.py averneus neuvoo glassdoor JobApp
-python3 $SCRIPTPATH/handle_labels_multiple_query.py alihandikel neuvoo glassdoor linkedin JobApp
-python3 $SCRIPTPATH/handle_labels_multiple_query.py averneus dailycodingproblem DailyCode
-python3 $SCRIPTPATH/handle_labels_multiple_query.py averneus pythonweekly elementalselenium jsw Notes
+SCRIPTPATH="/home/uad/apps/gmail-organizer"
+#SCRIPTPATH="/home/uad/dev/gmail-organiser"
+
+python3 $SCRIPTPATH/handle_labels_multiple_query.py \
+--account alihandikel \
+--query reddit \
+--query stackoverflow \
+--query medium \
+--query quora \
+--label Informative
+
+python3 $SCRIPTPATH/handle_labels_multiple_query.py \
+--account averneus \
+--query reddit \
+--query stackoverflow \
+--query medium \
+--query quora \
+--label Informative
+
+python3 $SCRIPTPATH/handle_labels_multiple_query.py \
+--account averneus \
+--query neuvoo \
+--query glassdoor \
+--query linkedin \
+--label JobApp
+
+python3 $SCRIPTPATH/handle_labels_multiple_query.py \
+--account alihandikel \
+--query neuvoo \
+--query glassdoor \
+--query linkedin \
+--label JobApp
+
+python3 $SCRIPTPATH/handle_labels_multiple_query.py \
+--account averneus \
+--query dailycodingproblem \
+--label DailyCode
+
+python3 $SCRIPTPATH/handle_labels_multiple_query.py \
+--account averneus \
+--query pythonweekly \
+--query elementalselenium \
+--query jsw \
+--label Notes
+
