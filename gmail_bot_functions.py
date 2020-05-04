@@ -86,7 +86,7 @@ logging.getLogger('root').setLevel(logging.DEBUG)
 def auth_service_to(account):
   try:
     #os.chdir("/home/uad/apps/bot-gmail-organizer/")
-    os.chdir("/home/uad/dev/bot-gmail")
+    os.chdir("/home/uad/dev/gmail-organiser/")
     pathname = os.path.dirname(sys.argv[0])
     fullpath = os.path.abspath(pathname)
     creds = None
