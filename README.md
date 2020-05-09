@@ -1,4 +1,6 @@
 
+![Image description](assets/picture.jpg)
+
 # bot-gmail-organizer
 
 This repo is wrapper library for Gmail API interactions. Additionally it includes scripts used for my personal assistant bot (on Linux via orchestration of cron jobs). 
