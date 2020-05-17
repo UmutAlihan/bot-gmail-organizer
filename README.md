@@ -2,7 +2,7 @@
 ![Image description](assets/picture.jpg)
 
 # bot-gmail-organizer
-![Build Status](https://github.com/UmutAlihan/bot-gmail-organizer/workflows/main/badge.svg)
+![Build Status](https://github.com/UmutAlihan/bot-gmail-organizer/workflows/CI/badge.svg)
 
 This repo is wrapper library for Gmail API interactions. Additionally it includes scripts used for my personal assistant bot (on Linux via orchestration of cron jobs). 
 It organizes mailboxes in a give gmail account based on defined rules.
