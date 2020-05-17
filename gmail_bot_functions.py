@@ -51,47 +51,17 @@ logging.getLogger('root').setLevel(logging.DEBUG)
 
 
 
-"""def auth_service():
+def auth_service_to(account, state="prod"):
   try:
-    os.chdir("/home/uad/apps/bot-gmail-organizer/")
-    creds = None
-    # The file token.pickle stores the user's access and refresh tokens, and is
-    # created automatically when the authorization flow completes for the first
-    # time.
-    if os.path.exists('token.pickle'):
-      with open('token.pickle', 'rb') as token:
-        creds = pickle.load(token)
-    # If there are no (valid) credentials available, let the user log in.
-    if not creds or not creds.valid:
-      if creds and creds.expired and creds.refresh_token:
-        creds.refresh(Request())
-      else:
-        flow = InstalledAppFlow.from_client_secrets_file(
-            'credentials.json', SCOPES)
-        creds = flow.run_local_server(port=0)
-      # Save the credentials for the next run
-      with open('token.pickle', 'wb') as token:
-        pickle.dump(creds, token)
-
-    logging.info("Authenticated")
-  except Exception as e:
-    logging.info("Authentication failed")
-    logging.error(e)
-    sys.exit(1)
-
-  service = build('gmail', 'v1', credentials=creds)
-  return service"""
-
-
-def auth_service_to(account):
-  try:
-    path_to_be = "/home/uad/apps/gmail-organizer"
+    #path_to_be = "/home/uad/apps/gmail-organizer"
+    path_to_be = "/home/uad/dev/gmail-organiser"
     os.chdir(path_to_be)
     pathname = os.path.dirname(sys.argv[0])
     fullpath = os.path.abspath(pathname)
-    if (path_to_be != fullpath):
-        print("fullpath & path_to_me mismatch: " + fullpath)
-        sys.exit()
+    if(state != "prod"):
+      if (path_to_be != fullpath):
+          print("fullpath & path_to_be mismatch: " + fullpath)
+          sys.exit()
     creds = None
     # The file token.pickle stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
@@ -446,3 +416,34 @@ def trash_message(service, mailid ,userId="me"):
     return mime_msg
   except Exception as error:
     logging.error(error)"""
+
+"""def auth_service():
+  try:
+    os.chdir("/home/uad/apps/bot-gmail-organizer/")
+    creds = None
+    # The file token.pickle stores the user's access and refresh tokens, and is
+    # created automatically when the authorization flow completes for the first
+    # time.
+    if os.path.exists('token.pickle'):
+      with open('token.pickle', 'rb') as token:
+        creds = pickle.load(token)
+    # If there are no (valid) credentials available, let the user log in.
+    if not creds or not creds.valid:
+      if creds and creds.expired and creds.refresh_token:
+        creds.refresh(Request())
+      else:
+        flow = InstalledAppFlow.from_client_secrets_file(
+            'credentials.json', SCOPES)
+        creds = flow.run_local_server(port=0)
+      # Save the credentials for the next run
+      with open('token.pickle', 'wb') as token:
+        pickle.dump(creds, token)
+
+    logging.info("Authenticated")
+  except Exception as e:
+    logging.info("Authentication failed")
+    logging.error(e)
+    sys.exit(1)
+
+  service = build('gmail', 'v1', credentials=creds)
+  return service"""
