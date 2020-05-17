@@ -23,8 +23,8 @@ trap 'echo "\"${last_command}\" command filed with exit code $?."' EXIT
 ################################################################
 
 
-SCRIPTPATH="/home/uad/apps/gmail-organizer"
-#SCRIPTPATH="/home/uad/dev/gmail-organiser"
+#SCRIPTPATH="/home/uad/apps/gmail-organizer/src"
+SCRIPTPATH="/home/uad/dev/gmail-organiser/src"
 
 python3 $SCRIPTPATH/handle_labels_multiple_query.py \
 --account alihandikel \
