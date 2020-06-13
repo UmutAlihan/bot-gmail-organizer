@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 
 import gmail_bot_functions as gb
-import sys, time, traceback, logging, coloredlogs
+import sys, time, traceback, logging, coloredlogs, os
 
 # Sample command:
 # python3 remove_older_than.py JobApp 3
@@ -54,4 +54,5 @@ def execute(args):
 
 if __name__ == "__main__":
     logging.info("remove_older_than.py")
+    os.chdir("/home/uad/apps/gmail-organizer/")
     execute(sys.argv[1:])
