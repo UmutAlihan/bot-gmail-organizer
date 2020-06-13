@@ -22,11 +22,10 @@ trap 'echo "\"${last_command}\" command filed with exit code $?."' EXIT
 #SOURCE2: https://kvz.io/blog/2013/11/21/bash-best-practices
 ################################################################
 
-
-SCRIPTPATH="/home/uad/apps/gmail-organizer"
-
-
+#SCRIPTPATH="/home/uad/apps/gmail-organizer/src"
+SCRIPTPATH="/home/uad/dev/gmail-organiser/src"
 cd $SCRIPTPATH
+
 
 python3 $SCRIPTPATH/handle_labels_multiple_query.py \
 --account alihandikel \

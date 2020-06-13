@@ -1,6 +1,9 @@
 # This is a basic workflow to help you get started with Actions
 
 name: CI
+# Sources: 
+## https://medium.com/swlh/automate-python-testing-with-github-actions-7926b5d8a865
+## https://help.github.com/en/actions/language-and-framework-guides/using-python-with-github-actions
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
