@@ -1,6 +1,7 @@
 [*] beautify/refactor argument parisng
 (source: https://stackoverflow.com/questions/20063/whats-the-best-way-to-parse-command-line-arguments)
 
-[] create gmail account for testing
+[] reflect changes to dockerize.sh scripts
+[] build new image
 [] write unittests
-[] implement ci/cd for github repo
+

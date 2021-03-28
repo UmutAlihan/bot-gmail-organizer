@@ -22,8 +22,9 @@ trap 'echo "\"${last_command}\" command filed with exit code $?."' EXIT
 #SOURCE2: https://kvz.io/blog/2013/11/21/bash-best-practices
 ################################################################
 
-SCRIPTPATH="/home/uad/apps/gmail-organizer/src"
+#SCRIPTPATH="/home/uad/apps/gmail-organizer/src"
 #SCRIPTPATH="/home/uad/dev/gmail-organiser/src"
+SCRIPTPATH="/app"
 cd $SCRIPTPATH
 
 
@@ -41,8 +42,6 @@ python3 $SCRIPTPATH/handle_labels_multiple_query.py \
 --query stackoverflow \
 --query medium \
 --query quora \
---query aposto \
---query Adrian
 --label Informative
 
 python3 $SCRIPTPATH/handle_labels_multiple_query.py \
@@ -69,26 +68,6 @@ python3 $SCRIPTPATH/handle_labels_multiple_query.py \
 --query pythonweekly \
 --query elementalselenium \
 --query jsw \
---label GoodToKnow
+--label Notes
 
-python3 $SCRIPTPATH/handle_labels_multiple_query.py \
---account averneus \
---query trendoyl \
---query samm \
---query paytr \
---query getir \
---query fatura \
---query sipariş \
---query E-Arşiv
---query e-fatura \
---query kargo \
---query invoice \
---label Regulatory
-
-python3 $SCRIPTPATH/handle_labels_multiple_query.py \
---account alihandikel \
---query özeti \
---query özetiniz \
---query fatura \
---query e-arşiv \
---label Regulatory
+python3 remove_older_than_dockerize.py JobApp 3

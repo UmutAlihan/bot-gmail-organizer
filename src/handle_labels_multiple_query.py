@@ -42,7 +42,7 @@ def execute(account, query, label):
 
 
 if __name__ == "__main__":
-    logging.info("Running script: handle_labels_multiple_query.py")
+    logging.info("RUNNING: handle_labels_multiple_query.py")
     execute(sys.argv[1:])
 
 
